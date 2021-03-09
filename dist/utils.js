@@ -87,6 +87,53 @@ axios.delete = (url, options) => axios({
 
 /***/ }),
 
+/***/ "./src/debounce.js":
+/*!*************************!*\
+  !*** ./src/debounce.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "debounce": () => (/* binding */ debounce)
+/* harmony export */ });
+function debounce (fn, ms) {
+    let timer = null
+    return function(...arg) {
+        clearTimeout(timer) 
+        timer = setTimeout(() => fn.apply(this, arg), ms)
+    }
+}
+
+/***/ }),
+
+/***/ "./src/deepClone.js":
+/*!**************************!*\
+  !*** ./src/deepClone.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "deepClone": () => (/* binding */ deepClone)
+/* harmony export */ });
+function deepClone(target) {
+    if (typeof target !== 'object' || target === null) {
+        return target
+    }
+    let clone = Object.assign({}, target) // [1, 2 , 3] => {1:1, 2:2, 3: 3}
+    Object.keys(clone).forEach(key => {
+        clone[key] = deepClone(target[key])
+    })
+    if(Array.isArray(target)){
+        clone.length = target.length
+        clone = Array.from(clone)
+    }
+    return clone
+}
+
+/***/ }),
+
 /***/ "./src/demo.js":
 /*!*********************!*\
   !*** ./src/demo.js ***!
@@ -126,6 +173,28 @@ function queryString( queryParameters ) {
         )
       : ''
   }
+
+/***/ }),
+
+/***/ "./src/throttle.js":
+/*!*************************!*\
+  !*** ./src/throttle.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "throttle": () => (/* binding */ throttle)
+/* harmony export */ });
+function throttle(fn, ms) {
+    let startTime = Date.now()
+    return function(...arg) {
+        if(Date.now() - startTime >= ms) {
+            startTime = Date.now()
+            return fn.apply(this, arg)
+        }
+    }
+}
 
 /***/ })
 
@@ -193,12 +262,21 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "demo": () => (/* reexport safe */ _demo__WEBPACK_IMPORTED_MODULE_0__.demo),
-/* harmony export */   "axios": () => (/* reexport safe */ _axios__WEBPACK_IMPORTED_MODULE_1__.axios),
-/* harmony export */   "queryString": () => (/* reexport safe */ _querystring__WEBPACK_IMPORTED_MODULE_2__.queryString)
+/* harmony export */   "deepClone": () => (/* reexport safe */ _deepClone__WEBPACK_IMPORTED_MODULE_1__.deepClone),
+/* harmony export */   "axios": () => (/* reexport safe */ _axios__WEBPACK_IMPORTED_MODULE_2__.axios),
+/* harmony export */   "queryString": () => (/* reexport safe */ _querystring__WEBPACK_IMPORTED_MODULE_3__.queryString),
+/* harmony export */   "debounce": () => (/* reexport safe */ _debounce__WEBPACK_IMPORTED_MODULE_4__.debounce),
+/* harmony export */   "throttle": () => (/* reexport safe */ _throttle__WEBPACK_IMPORTED_MODULE_5__.throttle)
 /* harmony export */ });
 /* harmony import */ var _demo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./demo */ "./src/demo.js");
-/* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./axios */ "./src/axios.js");
-/* harmony import */ var _querystring__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./querystring */ "./src/querystring.js");
+/* harmony import */ var _deepClone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./deepClone */ "./src/deepClone.js");
+/* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./axios */ "./src/axios.js");
+/* harmony import */ var _querystring__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./querystring */ "./src/querystring.js");
+/* harmony import */ var _debounce__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./debounce */ "./src/debounce.js");
+/* harmony import */ var _throttle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./throttle */ "./src/throttle.js");
+
+
+
 
 
 
