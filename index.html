@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="get()">GET</button>
+    <button onclick="post()">POST</button>
+    <button onclick="put()">put</button>
+    <button onclick="delete1()">delete</button>
+    <script src="dist/utils.js"></script>
+    <script>
+        const { axios } = utils;
+        function get() {
+            console.log('get')
+            axios.get('http://localhost:3000/posts?author=chaoshuai', 
+            {
+                params: {
+                    id:3
+                }
+            })
+            .then(res => {
+                console.log(res)
+            })
+        }
+        function post() {
+            axios.post('http://localhost:3000/posts',
+                
+            {
+                data: {
+                    author: "chaoshuai",
+                    title: "post-test"
+                }
+            })
+            .then(res => {
+                console.log(res)
+            })
+        }
+        function put() {
+            axios.put('http://localhost:3000/posts/3', {
+                data: {
+                    author: "chaoshuai-----",
+                    title: "post-test------"
+                }
+            })
+            .then(res => {
+                console.log(res)
+            })
+        }
+        function delete1() {
+            axios.delete('http://localhost:3000/posts/3')
+            .then(res => {
+                console.log(res)
+            })
+        }
+
+    </script>
+</body>
+</html>
