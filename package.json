@@ -5,7 +5,6 @@
   "main": "/dist/utils.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack",
     "build": "webpack"
   },
   "repository": {
@@ -13,10 +12,16 @@
     "url": "git+https://github.com/mojowork/utils.git"
   },
   "keywords": [
-    "@chaos",
-    "utils"
+    "chaoshuai",
+    "utils",
+    "deepClone",
+    "axios",
+    "queryString",
+    "throttle",
+    "debounce",
+    "eventbus"
   ],
-  "author": "chaos",
+  "author": "chaoshuai",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mojowork/utils/issues"
