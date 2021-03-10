@@ -14,12 +14,33 @@
     <script src="dist/utils.js"></script>
     <script>
         const { axios } = utils;
+        
+        axios.requestEach(config => {
+            console.log('requestEach', config)
+            return config
+        }, error => {
+            Promise.reject(error)
+        });
+        axios.requestEach(config => {
+            console.log('requestEach', config)
+            return config
+        }, error => {
+            Promise.reject(error)
+        });
+
+        axios.responseEach(res => {
+            console.log('responseEach', res)
+            return res
+        }, error => {
+            Promise.reject(error)
+        });
+        // console.log('axios', axios.requsetEach)
         function get() {
             console.log('get')
-            axios.get('http://localhost:3000/posts?author=chaoshuai', 
+            axios.get('http://localhost:3000/posts', 
             {
                 params: {
-                    id:3
+                    // id:3
                 }
             })
             .then(res => {
