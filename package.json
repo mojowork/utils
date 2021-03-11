@@ -1,7 +1,7 @@
 {
   "name": "@chaoshuai/utils",
-  "version": "0.0.1",
-  "description": "个人常用工具库",
+  "version": "0.1.0",
+  "description": "项目常用工具库",
   "main": "/dist/utils.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,7 +19,8 @@
     "queryString",
     "throttle",
     "debounce",
-    "eventbus"
+    "eventbus",
+    "datahub"
   ],
   "author": "chaoshuai",
   "license": "ISC",

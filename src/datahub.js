@@ -11,7 +11,7 @@ export function createDataHub () {
         get(symbol, id) {
             if(!this.hub[symbol]) return
             if(id == null){
-                return this.hub[symbol]
+                return this.hub[symbol].filters(Boolean)
             } else {
                 return this.hub[symbol][id]
             }
@@ -22,7 +22,7 @@ export function createDataHub () {
             if(id == null){
                 delete this.hub[symbol]
             } else {
-                this.hub[symbol].splice(id, 1)
+                this.hub[symbol][id] = null
             }
         },
         clean() {
