@@ -148,7 +148,7 @@ function createDataHub () {
         get(symbol, id) {
             if(!this.hub[symbol]) return
             if(id == null){
-                return this.hub[symbol]
+                return this.hub[symbol].filters(Boolean)
             } else {
                 return this.hub[symbol][id]
             }
@@ -159,7 +159,7 @@ function createDataHub () {
             if(id == null){
                 delete this.hub[symbol]
             } else {
-                this.hub[symbol].splice(id, 1)
+                this.hub[symbol][id] = null
             }
         },
         clean() {
@@ -311,18 +311,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "queryString": () => (/* binding */ queryString)
 /* harmony export */ });
+/* harmony import */ var _is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./is */ "./src/is.js");
+
+const replace = {
+    '!': '%21',
+    "'": '%27',
+    '(': '%28',
+    ')': '%29',
+    '~': '%7E',
+    '%20': '+',
+    '%00': '\x00'
+  }
+function encode(str) {
+  return encodeURIComponent(str).replace(/[!'\(\)~]|%20|%00/g, match => replace[match])
+}
 function queryString( queryParameters ) {
-    return queryParameters
-      ? Object.entries(queryParameters).reduce(
-          (queryString, [key, val]) => {
-            const symbol = queryString.length === 0 ? '?' : '&'
-            queryString +=
-              typeof val !== 'object' ? `${symbol}${key}=${val}` : ''
-            return queryString
-          },
-          ''
-        )
-      : ''
+    if(!(0,_is__WEBPACK_IMPORTED_MODULE_0__.isObject)(queryParameters)) return ''
+    return Object.entries(queryParameters)
+    .reduce(
+        (snippets, [key, val]) => {
+          const name = encode(key)
+           if(Array.isArray(val)) {
+            snippets.push(...val.map(element => `${name}[]=${encode(element)}`))
+           } else {
+            snippets.push(`${name}=${encode(val)}`)
+           }
+           return snippets
+        }, [])
+    .join('&')
   }
 
 /***/ }),

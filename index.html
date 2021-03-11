@@ -13,71 +13,43 @@
     <button onclick="delete1()">delete</button>
     <script src="dist/utils.js"></script>
     <script>
-        const { axios } = utils;
+        const { queryString } = utils;
         
-        axios.requestEach(config => {
-            console.log('requestEach', config)
-            return config
-        }, error => {
-            Promise.reject(error)
-        });
-        axios.requestEach(config => {
-            console.log('requestEach', config)
-            return config
-        }, error => {
-            Promise.reject(error)
-        });
-
-        axios.responseEach(res => {
-            console.log('responseEach', res)
-            return res
-        }, error => {
-            Promise.reject(error)
-        });
-        // console.log('axios', axios.requsetEach)
-        function get() {
-            console.log('get')
-            axios.get('http://localhost:3000/posts', 
-            {
-                params: {
-                    // id:3
-                }
-            })
-            .then(res => {
-                console.log(res)
-            })
-        }
-        function post() {
-            axios.post('http://localhost:3000/posts',
-                
-            {
-                data: {
-                    author: "chaoshuai",
-                    title: "post-test"
-                }
-            })
-            .then(res => {
-                console.log(res)
-            })
-        }
-        function put() {
-            axios.put('http://localhost:3000/posts/3', {
-                data: {
-                    author: "chaoshuai-----",
-                    title: "post-test------"
-                }
-            })
-            .then(res => {
-                console.log(res)
-            })
-        }
-        function delete1() {
-            axios.delete('http://localhost:3000/posts/3')
-            .then(res => {
-                console.log(res)
-            })
-        }
-
+        console.log(queryString())
+        console.log(queryString(123))
+        console.log(queryString({}))
+        console.log(queryString({
+            a:123,
+            b:'456',
+            c: undefined
+        }))
+       
+        console.log(queryString({
+            a: 123,
+            b:' ',
+            c: null
+        }))
+        console.log(queryString({
+            a: ')',
+            b:' ',
+            c: null
+        }))
+        console.log(queryString({
+            '(': ')',
+            '%':' ',
+            c: null
+        }))
+        console.log(queryString({
+            a: [1,2,3,4,5],
+            b: ['a','b','c',null,undefined],
+        }))
+        console.log(queryString({
+            a: {},
+            b: {x: 'y'}
+        }))
+        console.log(queryString({
+            a: () => {}
+        }))
     </script>
 </body>
 </html>

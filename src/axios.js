@@ -20,7 +20,8 @@ function request({
         method = method.toUpperCase()
         if(Object.keys(params).length){
             let querystring = qs(params)
-            url = ~url.indexOf('?') ? `${url}&${querystring.substring(1)}` : `${url}${querystring}`
+            const symbol = ~url.indexOf('?') ? '&' : '?'
+            url = `${url}${symbol}${querystring}`
         }
         
         const xhr = new XMLHttpRequest()
